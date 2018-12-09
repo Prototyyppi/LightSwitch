@@ -1,5 +1,5 @@
 #include "LightSwitch.h"
-#include "Arduino.h"
+//#include "Arduino.h"
 
 
 LightSwitch::LightSwitch() {
@@ -36,13 +36,5 @@ int LightSwitch::get_response(int timeout) {
 }
 
 int LightSwitch::_send_query(String data) {
-    client.println("POST /update HTTP/1.1");
-    client.println("Host: api.thingspeak.com");
-    client.println("User-Agent: ARDUINO/1.337");
-    client.println("Connection: close");
-    client.println("X-THINGSPEAKAPIKEY: " + API_KEY);
-    client.println("Content-Type: application/x-www-form-urlencoded");
-    client.println("Content-Length: " + String(data.length()));
-    client.println("");
-    client.print(data);
+
 }

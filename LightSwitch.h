@@ -1,6 +1,7 @@
 #ifndef LightSwitch_header
 #define LightSwitch_header
-#include <ESP8266WiFi.h>
+//#include <ESP8266WiFi.h>
+#include "Arduino.h"
 
 /* Declare names for pin numbers */
 enum buttons {
@@ -24,7 +25,7 @@ class LightSwitch
     int _send_query(String data);
     /* Wi-Fi Settings */
     String API_KEY = "XXXXXXXX";
-    WiFiClient client;
+//    WiFiClient client;
 };
 
 

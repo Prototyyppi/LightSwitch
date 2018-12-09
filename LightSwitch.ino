@@ -3,8 +3,13 @@
 
 LightSwitch* lightswitch = new LightSwitch();
 
-#define RX 10
-#define TX 11
+int countTrueCommand;
+int countTimeCommand; 
+boolean found = false; 
+int valSensor = 1;
+
+#define RX 9
+#define TX 10
 SoftwareSerial esp8266(RX,TX); 
 
 void setup() {
@@ -16,18 +21,15 @@ void setup() {
   pinMode(YELLOW_GPIO, OUTPUT);
   pinMode(RED_GPIO, OUTPUT);
 
-  const char* ssid = "XXX";
-  const char* passwd = "XXXXXXXX";
+  String ssid = "XXX";
+  String passwd = "XXXXXXXX";
   esp8266.begin(115200);
+  /* Check connection */
   sendCommand("AT",5,"OK");
+  /* Disable AP mode */
   sendCommand("AT+CWMODE=1",5,"OK");
+  /* Connect */
   sendCommand("AT+CWJAP=\""+ ssid +"\",\""+ passwd +"\"",20,"OK");
-  //WiFi.begin(ssid, password);
-  /*while (WiFi.status() != WL_CONNECTED) {
-    Serial.println("Waiting for WIFI...");
-    delay(500);
-  }*/
-
 }
 
 void loop() {
@@ -37,7 +39,7 @@ void loop() {
     delay(50);
   /* 2. Button pressed, get response */
   lightswitch->toggle_light(YELLOW_GPIO);
-  response = lightswitch->get_response(5000);
+  response = get_response(5000);
   /* 3. Toggle light accordingly */
   if (response != ETIMEOUT)
     lightswitch->toggle_light(response);
@@ -81,3 +83,13 @@ void sendCommand(String command, int maxTime, char readReplay[]) {
   
   found = false;
  }
+
+    /* client.println("POST /update HTTP/1.1");
+    client.println("Host: api.thingspeak.com");
+    client.println("User-Agent: ARDUINO/1.337");
+    client.println("Connection: close");
+    client.println("X-THINGSPEAKAPIKEY: " + API_KEY);
+    client.println("Content-Type: application/x-www-form-urlencoded");
+    client.println("Content-Length: " + String(data.length()));
+    client.println("");
+    client.print(data);*/
