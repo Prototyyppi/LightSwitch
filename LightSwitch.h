@@ -34,6 +34,7 @@ enum return_types{
   EOK = 0,
   EFAIL,
   ETIMEOUT,
+  UNCLEAR,
 };
 
 // Library: esp8266 by ESP8266 Community

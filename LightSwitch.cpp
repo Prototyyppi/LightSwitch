@@ -1,5 +1,4 @@
 #include "LightSwitch.h"
-//#include "Arduino.h"
 
 
 LightSwitch::LightSwitch() {
